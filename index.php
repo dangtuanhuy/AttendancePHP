@@ -38,6 +38,9 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<?php 
+include_once('config/connect.php');
+?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -348,13 +351,13 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
+            <span>Management</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="?page=education"><i class="fa fa-circle-o"></i> Education</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
@@ -590,8 +593,8 @@
      <?php 
     if (isset($_GET['page'])) {
       $page = $_GET['page'];
-      if ($page == "adu") {
-        include_once("resource/Education/Education.php");
+      if ($page == "education") {
+        include_once("resurce/Education/Education.php");
 
       }
     } else
@@ -611,8 +614,8 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
   <?php
-    @include_once("footer.php")
-    ?>
+  @include_once("footer.php")
+  ?>
   </footer>
 
   <!-- Control Sidebar -->
@@ -812,7 +815,35 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js">
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
+
+
+<script language="javascript">
+$(document).ready(function() {
+                                var table = $('#myTable').DataTable( {
+                                  responsive: true,
+                                  "language": {
+                                    "infoEmpty": "Empty data",
+                                    "emptyTable": "Data not available",
+                                    "processing": "Processing...",
+                                    "search": "Search:",
+                                    "loadingRecords": "Loading data...",
+                                    "zeroRecords": "Data not found",
+                                    "paginate": {
+                                      "first": "|<",
+                                      "last": ">|",
+                                      "next": ">>",
+                                      "previous": "<<"
+                                    }
+                                  },
+                                  "lengthMenu": [[5,10, 15, 20, 25, 30, -1], [5,10, 15, 20, 25, 30, "All"]]
+                                } );
+        new $.fn.dataTable.FixedHeader( table );
+      } );
+</script> 
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -820,11 +851,10 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
+
+
+
+
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
 <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -844,8 +874,7 @@
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
