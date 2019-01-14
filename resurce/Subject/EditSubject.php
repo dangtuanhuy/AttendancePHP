@@ -1,8 +1,8 @@
 <?php 
 if (isset($_GET['ma'])) {
     $ma = $_GET["ma"];
-    $sqlselect = "SELECT `SubjectId`, `SubjectName`, `SubjectTheory`, `SubjectPractical`, `TheoryPractical`, `SubjectSem`, `EducationName` FROM `subject`
-    JOIN education ON subject.EducationId = education.EducationId";
+    $sqlselect = "SELECT `SubjectId`, `SubjectName`, `SubjectTheory`, `SubjectPractical`, `TheoryPractical`, `SubjectSem`, `EducationId` FROM subject
+    WHERE SubjectId='$ma'";
     $result = mysqli_query($conn, $sqlselect);
     $row = mysqli_fetch_row($result);
     $SubjectId = $row['0'];
@@ -15,7 +15,22 @@ if (isset($_GET['ma'])) {
 } else {
     echo '<meta http-equiv="refresh" content="0;URL=?page=sub"/>';
 }
+function bindUpdateSubject($conn,$selectedValue)
+{
+    $sqlstring = "SELECT `EducationId`, `EducationName`, `EducationDetails` FROM `education` ";
 
+    $result = mysqli_query($conn, $sqlstring);
+    echo "<select name='slEdu' class='form-control'>
+    <option value='0'>Education</option>";
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        if ($row['EducationId'] == $selectedValue) {
+            echo "<option value='" . $row['EducationId'] . "' selected>" . $row['EducationName'] . "</option>";
+        } else {
+            echo "<option value='" . $row['EducationId'] . "'>" . $row['EducationName'] . "</option>";
+        }
+    }
+    echo "</select>";
+}
 if (isset($_POST["btnEdit"])) {
 
     $SubjectName = $_POST["txtName"];
@@ -70,20 +85,7 @@ if (isset($_POST["btnEdit"])) {
 			            <label for="slEdu">Education: </label>
                       <?php 
 
-                        $sqlstring = "SELECT * FROM `subject`
-                        JOIN education ON subject.EducationId = education.EducationId";
-
-                        $result = mysqli_query($conn, $sqlstring);
-                        echo "<select name='slEdu' class='form-control'>
-                        <option value='0'>Education</option>";
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                            if ($row['EducationId'] == $selectedValue) {
-                                echo "<option value='" . $row['EducationId'] . "' selected>" . $row['EducationName'] . "</option>";
-                            } else {
-                                echo "<option value='" . $row['EducationId'] . "'>" . $row['EducationName'] . "</option>";
-                            }
-                        }
-                        echo "</select>";
+bindUpdateSubject($conn,$idEdu)
 
                         ?>
                     </div>

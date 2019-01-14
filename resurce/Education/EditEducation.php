@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET["ma"])) {
     $ma = $_GET["ma"];
-    // $conn = new mysqli("localhost", "root", "", "Umbala");
+    
     $sqlstring = "SELECT EducationId, EducationName, EducationDetails FROM education WHERE EducationId='$ma'";
 
     $result = mysqli_query($conn, $sqlstring);
