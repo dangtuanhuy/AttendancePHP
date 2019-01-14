@@ -15,7 +15,7 @@ if (isset($_GET['ma'])) {
 } else {
     echo '<meta http-equiv="refresh" content="0;URL=?page=sub"/>';
 }
-function bindUpdateSubject($conn,$selectedValue)
+function bindUpdateSubject($conn, $selectedValue)
 {
     $sqlstring = "SELECT `EducationId`, `EducationName`, `EducationDetails` FROM `education` ";
 
@@ -85,7 +85,7 @@ if (isset($_POST["btnEdit"])) {
 			            <label for="slEdu">Education: </label>
                       <?php 
 
-bindUpdateSubject($conn,$idEdu)
+                        bindUpdateSubject($conn, $idEdu)
 
                         ?>
                     </div>
