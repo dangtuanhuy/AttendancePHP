@@ -30,7 +30,7 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 	<form name="frmXoa" method="post" action="">
 		<h1 class="text-center">Manage Education</h1>
 		<p>
-			<a  class="btn btn-success" href="?page=addEdu">
+			<a  class="btn btn-success" href="?page=Addeducation">
 				ADD
 			</a>
 
@@ -62,11 +62,11 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
                         <td><?php echo $row["EducationName"] ?></td>
                         <td><?php echo $row["EducationDetails"] ?></td>
 						<td align='center'>
-							<a class="btn btn-danger"   href="?page=edu&ma=<?php echo $row['EducationId']; ?>" onclick="return deleteConfirm()">
+							<a class="btn btn-danger"   href="?page=education&ma=<?php echo $row['EducationId']; ?>" onclick="return deleteConfirm()">
 								Delete</a>
 							</td>
 							<td>
-								<a class="btn btn-primary" href="?page=educationUpdate&ma=<?php echo $row['EducationId']; ?>">Update</a>
+								<a class="btn btn-primary" href="?page=Updateeducation&ma=<?php echo $row['EducationId']; ?>">Update</a>
 							</td>
 						</tr>
 						<?php

@@ -358,7 +358,7 @@ include_once('config/connect.php');
           </a>
           <ul class="treeview-menu">
             <li><a href="?page=education"><i class="fa fa-circle-o"></i> Education</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
+            <li><a href="?page=subject"><i class="fa fa-circle-o"></i> Subject</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
@@ -595,6 +595,27 @@ include_once('config/connect.php');
       $page = $_GET['page'];
       if ($page == "education") {
         include_once("resurce/Education/Education.php");
+
+      }
+      if ($page == "Addeducation") {
+        include_once("resurce/Education/AddEducation.php");
+
+      }
+      if ($page == "Updateeducation") {
+        include_once("resurce/Education/EditEducation.php");
+
+      }
+      //subject
+      if ($page == "subject") {
+        include_once("resurce/Subject/Subject.php");
+
+      }
+      if ($page == "Addsubject") {
+        include_once("resurce/Subject/AddSubject.php");
+
+      }
+      if ($page == "Editsubject") {
+        include_once("resurce/Subject/EditSubject.php");
 
       }
     } else
