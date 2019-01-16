@@ -359,8 +359,9 @@ include_once('config/connect.php');
           <ul class="treeview-menu">
             <li><a href="?page=education"><i class="fa fa-circle-o"></i> Education</a></li>
             <li><a href="?page=subject"><i class="fa fa-circle-o"></i> Subject</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="?page=teacher"><i class="fa fa-circle-o"></i> Teacher</a></li>
+            <li><a href="?page=class"><i class="fa fa-circle-o"></i> Class</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Student</a></li>
           </ul>
         </li>
         <li>
@@ -617,6 +618,29 @@ include_once('config/connect.php');
       if ($page == "Editsubject") {
         include_once("resurce/Subject/EditSubject.php");
 
+      }
+      //Teacher
+      if ($page == "teacher") {
+        include_once("resurce/Teacher/Teacher.php");
+
+      }
+      if ($page == "AddTeacher") {
+        include_once("resurce/Teacher/AddTeacher.php");
+
+      }
+      if ($page == "EditTeacher") {
+        include_once("resurce/Teacher/EditTeacher.php");
+
+      }
+      if (isset($_GET['page']) && $_GET['page'] == "ActiveTeacher") {
+        if ($_GET['PersonnalStatus'] == 0) {
+          $active = 1;
+        } else {
+          $active = 0;
+        }
+        $updateStatus = "UPDATE `personnel` SET  `PersonnalStatus`=" .$active. " where `PersonnelAccount` = '" .$_GET['PersonnelAccount']. "'";
+        mysqli_query($conn, $updateStatus);
+        echo "<script>window.location.href='?page=teacher'</script>";
       }
     } else
 
