@@ -361,7 +361,7 @@ include_once('config/connect.php');
             <li><a href="?page=subject"><i class="fa fa-circle-o"></i> Subject</a></li>
             <li><a href="?page=teacher"><i class="fa fa-circle-o"></i> Teacher</a></li>
             <li><a href="?page=class"><i class="fa fa-circle-o"></i> Class</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Student</a></li>
+            <li><a href="?page=student"><i class="fa fa-circle-o"></i> Student</a></li>
           </ul>
         </li>
         <li>
@@ -638,9 +638,22 @@ include_once('config/connect.php');
         } else {
           $active = 0;
         }
-        $updateStatus = "UPDATE `personnel` SET  `PersonnalStatus`=" .$active. " where `PersonnelAccount` = '" .$_GET['PersonnelAccount']. "'";
+        $updateStatus = "UPDATE `personnel` SET  `PersonnalStatus`=" . $active . " where `PersonnelAccount` = '" . $_GET['PersonnelAccount'] . "'";
         mysqli_query($conn, $updateStatus);
         echo "<script>window.location.href='?page=teacher'</script>";
+      }
+      //Student
+      if ($page == "student") {
+        include_once("resurce/Student/Student.php");
+
+      }
+      if ($page == "AddStudent") {
+        include_once("resurce/Student/AddStudent.php");
+
+      }
+      if ($page == "EditStduent") {
+        include_once("resurce/Student/EditStudent.php");
+
       }
     } else
 

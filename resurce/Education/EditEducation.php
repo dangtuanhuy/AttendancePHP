@@ -3,7 +3,6 @@ if (isset($_GET["ma"])) {
     $ma = $_GET["ma"];
     
     $sqlstring = "SELECT EducationId, EducationName, EducationDetails FROM education WHERE EducationId='$ma'";
-
     $result = mysqli_query($conn, $sqlstring);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $eduid = $row['EducationId'];
