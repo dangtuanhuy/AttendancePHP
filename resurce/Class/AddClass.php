@@ -1,13 +1,13 @@
 <?php 
 function bindTeacherList($conn)
 {
-	$sqlSelect = "SELECT `SubjectId`,`SubjectName` FROM `subject`";
+	$sqlSelect = "SELECT `PersonnelAccount`, `PersonnelName`  FROM personnel";
 	$result = mysqli_query($conn, $sqlSelect);
 	echo "<select class='form-control' name='slTe'>
 	<option value='0'>Choice Teacher</option>";
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		echo "
-		<option value='" . $row['SubjectId'] . "'>" . $row['SubjectName'] . "</option>";
+		<option value='" . $row['PersonnelAccount'] . "'>" . $row['PersonnelName'] . "</option>";
 	}
 	echo "</select>";
 }
@@ -41,7 +41,7 @@ if (isset($_POST['btnAdd'])) {
 	$ClassActive = $_POST['txtDate'];
 	$idTech = $_POST['slTe'];
 	$idSub = $_POST['slSu'];
-	$sql = "INSERT INTO `class`(`ClassId`, `ClassName`, `ClassQty`, `ClassActive`, `PersonnelAccount`, `SubjectId`) VALUES  ('$SubjectId','$SubjectName',$Theory,$Practical,$TheoryPractical,$Sem,'$idEdu')";
+	$sql = "INSERT INTO `class`(`ClassId`, `ClassName`, `ClassQty`, `ClassActive`, `PersonnelAccount`, `SubjectId`) VALUES  ('$ClassId ','$ClassName',$Qty,'$ClassActive','$idTech','$idSub')";
 	mysqli_query($conn, $sql);
 	echo '<script> alert("Insert Success!");</script>';
 	echo '<meta http-equiv="refresh" content="0;URL=?page=class"/>';
@@ -77,7 +77,7 @@ if (isset($_POST['btnAdd'])) {
 			            <?php bindTeacherList($conn) ?>
                     </div>
 					<div class="form-group">
-			            <label for="slTe">Subject: </label>
+			            <label for="slSu">Subject: </label>
 			            <?php  bindSubjectList($conn) ?>
                     </div>
 					<input type="submit" class="btn btn-primary" name="btnAdd" value="Add"/>
