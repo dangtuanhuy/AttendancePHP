@@ -365,8 +365,8 @@ include_once('config/connect.php');
           </ul>
         </li>
         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+          <a href="?page=role">
+            <i class="fa fa-th"></i> <span>Role</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
@@ -653,6 +653,24 @@ include_once('config/connect.php');
       }
       if ($page == "EditStduent") {
         include_once("resurce/Student/EditStudent.php");
+
+      }
+      //Role
+      if ($page == "role") {
+        include_once("resurce/Role/Role.php");
+
+      }
+      //Class
+      if ($page == "class") {
+        include_once("resurce/Class/Class.php");
+
+      }
+      if ($page == "AddClass") {
+        include_once("resurce/Class/AddClass.php");
+
+      }
+      if ($page == "EditClass") {
+        include_once("resurce/Class/EditClass.php");
 
       }
     } else
