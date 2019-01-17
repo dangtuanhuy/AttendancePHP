@@ -11,16 +11,16 @@
 </script>
 <?php 
 if (isset($_GET["ma"])) {
-    $ClassStudentNum = $_GET["ma"];
-    mysqli_query($conn, "DELETE FROM `classstudent` WHERE ClassStudentNum=$ClassStudentNum");
+	$ClassStudentNum = $_GET["ma"];
+	mysqli_query($conn, "DELETE FROM `classstudent` WHERE ClassStudentNum=$ClassStudentNum");
 }
 ?>
 <?php
 if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
-    for ($i = 0; $i < count($_POST['checkbox']); $i++) {
-        $ClassStudentNum1 = $_POST['checkbox'][$i];
-        mysqli_query($conn, "DELETE FROM `classstudent` WHERE ClassStudentNum=$ClassStudentNum1");
-    }
+	for ($i = 0; $i < count($_POST['checkbox']); $i++) {
+		$ClassStudentNum1 = $_POST['checkbox'][$i];
+		mysqli_query($conn, "DELETE FROM `classstudent` WHERE ClassStudentNum=$ClassStudentNum1");
+	}
 }
 ?>
 
@@ -49,12 +49,12 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 			</thead>
 			<tbody>
 				<?php 
-    $num = 1;
-    $result = mysqli_query($conn, "SELECT `ClassStudentNum`, `ClassName`, `StudentName` FROM classstudent,student,class 
+			$num = 1;
+			$result = mysqli_query($conn, "SELECT `ClassStudentNum`, `ClassName`, `StudentName` FROM classstudent,student,class 
     WHERE class.ClassId = classstudent.ClassId AND student.StudentCode = classstudent.StudentId
     ORDER BY classstudent.ClassId ASC");
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        ?>
+			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+				?>
 					<tr>
 						<td class="text-center"><input name="checkbox[]" type="checkbox" id="checkbox[]" class="text-center" value="<?php echo $row["ClassStudentNum"] ?>"></td>
 						<td class="text-center"><?php echo $num ?></td>
@@ -69,9 +69,9 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 							</td>
 						</tr>
 						<?php
-        $num++;
-    }
-    ?>
+					$num++;
+				}
+				?>
 				</tbody>
                 
 			</table>
@@ -87,4 +87,5 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 
         </div>
     </div>
+	
 </div>
