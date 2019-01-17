@@ -50,6 +50,7 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
                     <th class="text-center  col-md-3 "><strong>Subject</strong></th>
 					<th class="text-center"><strong>Delete</strong></th>
 					<th class="text-center"><strong>Update</strong></th>
+					<th class="text-center"><strong>Student-Class</strong></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -76,6 +77,7 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 						<td>
 						<a class="btn btn-primary" href="?page=EditClass&ma=<?php echo $row['ClassId']; ?>">Update</a>
 						</td>
+						<td><a class="btn btn-info" href="?page=classstudent"><i class="fa fa-calculator"></i></a></td>
 						</tr>
 						<?php
         $num++;

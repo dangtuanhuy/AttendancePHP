@@ -673,6 +673,19 @@ include_once('config/connect.php');
         include_once("resurce/Class/EditClass.php");
 
       }
+      //ClassStudent
+      if ($page == "classstudent") {
+        include_once("resurce/Classtudent/ClassStudent.php");
+
+      }
+      if ($page == "Addclassstudent") {
+        include_once("resurce/Classtudent/AddClassStudent.php");
+
+      }
+      if ($page == "Editclassstudent") {
+        include_once("resurce/Classtudent/EditClassStudent.php");
+
+      }
     } else
 
 
