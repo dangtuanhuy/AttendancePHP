@@ -1,6 +1,6 @@
 <?php 
 $sqlselect = "SELECT `PersonnelAccount`, `ParsonnelPassword`, `PersonnelEmail`, `PersonnelPhone`, `PersonnelName`, `PersonnelCetificate` FROM `personnel` WHERE PersonnelAccount = '" . $_SESSION['username'] . "'";
-$result = mysqli_query($conn, $query) or die(mysql_error());
+$result = mysqli_query($conn, $sqlselect);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $user = $_SESSION['username'];
 $fullname = $row["PersonnelName"];
@@ -40,7 +40,7 @@ if (isset($_POST['btnUpdate'])) {
 		} else {
 			mysqli_query($conn, "UPDATE `personnel` SET PersonnelEmail='" . $email . "', PersonnelPhone='" . $phone . "',PersonnelName='" . $fullname . "',PersonnelCetificate='" . $certificate . "' WHERE PersonnelAccount='" . $_SESSION['username'] . "' ") or die(mysqli_error());
 		}
-		echo "<script>alert('Update Success!');window.location='iecho $kiemtra;ndex.php';</script>";
+		echo "<script>alert('Update Success!');window.location='index.php';</script>";
 
 	} else {
 		echo $Check;
@@ -57,15 +57,15 @@ if (isset($_POST['btnUpdate'])) {
 					</div>
 					<div class="form-group">
 						<label for="txtID">Account:</label>
-						<input type="text" class="form-control" id="txtID" required name="txtID" placeholder="User account" value="<?php echo $user; ?>">
+						<input type="text" class="form-control" id="txtID" required name="txtID" placeholder="User account" value="<?php echo $user; ?>" readonly=''>
 					</div>
                     <div class="form-group">
 						<label for="txtPass">News Password:</label>
-						<input type="password" class="form-control" id="txtPass" required name="txtPass" placeholder="Password">
+						<input type="password" class="form-control" id="txtPass"  name="txtPass" placeholder="Password">
 					</div>
 					<div class="form-group">
 						<label for="txtPass">Repeat Password:</label>
-						<input type="password" class="form-control" id="txtPass1" required name="txtPass1" placeholder="Password">
+						<input type="password" class="form-control" id="txtPass1" name="txtPass1" placeholder="Password">
 					</div>
                     <div class="form-group">
 						<label for="txtName">Full Name:</label>
