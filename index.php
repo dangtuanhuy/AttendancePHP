@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) :
+  echo '<meta http-equiv="refresh" content="0; URL=login.php"/>';
+else :
+  function PersonnelLogin($conn, $PersonnelCode)
+{
+  $sql_query_Personnel = "SELECT PersonnelName FROM `Personnel` WHERE `PersonnelAccount` = '{$PersonnelCode}'";
+  $sql_result_Personnel = mysqli_query($conn, $sql_query_Personnel) or die(mysql_error());
+  while ($row = $sql_result_Personnel->fetch_assoc()) {
+    echo $row['PersonnelName'];
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,248 +76,18 @@ include_once('config/connect.php');
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
+      
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
+        
           <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Create a nice theme
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Some task I need to do
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Make beautiful transitions
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
-            </ul>
-          </li>
+         
+           
+          
+          
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Huy</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
+        
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+         
         </ul>
       </div>
     </nav>
@@ -361,22 +145,29 @@ include_once('config/connect.php');
             </span>
           </a>
         </li>
-        <!-- <li class="treeview">
+         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
+            <span>Account</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+          <?php
+                if (isset($_SESSION['username']) && $_SESSION['username'] != "")
+                {
+                ?>
+          <li><a href="?page=UpdateTeacher"><i class="fa fa-circle-o"></i> Update</a></li>
+          <?php }?>
+          <li><a href="logout.php"> <i class="fa fa-power-off"></i><?php if (isset($_SESSION["username"])) {
+                                    PersonnelLogin($conn, $_SESSION["username"]);
+                                    echo " ";
+                                  } ?></a></li>
+            
           </ul>
         </li>
-        <li class="treeview">
+       <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
             <span>UI Elements</span>
@@ -508,7 +299,7 @@ include_once('config/connect.php');
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="Index.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
       </ol>
     </section>
@@ -521,14 +312,18 @@ include_once('config/connect.php');
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+            <?php 
+            $result = mysqli_query($conn, " SELECT * FROM `student`");
+            $num_rows2 = mysqli_num_rows($result);
+            ?>
+              <h3><?php echo $num_rows2 ?></h3>
 
-              <p>New Orders</p>
+              <p>Student</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="ion ion-person"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="?page=student" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -536,14 +331,18 @@ include_once('config/connect.php');
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <?php 
+            $result = mysqli_query($conn, " SELECT * FROM `subject`");
+            $num_rows1 = mysqli_num_rows($result);
+            ?>
+              <h3><?php echo $num_rows1 ?><sup style="font-size: 20px"></sup></h3>
 
-              <p>Bounce Rate</p>
+              <p>Subject</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="ion ion-ios-book"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="?page=subject" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -551,14 +350,18 @@ include_once('config/connect.php');
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+            <?php 
+            $result = mysqli_query($conn, " SELECT * FROM `Personnel`");
+            $num_rows = mysqli_num_rows($result);
+            ?>
+              <h3><?php echo $num_rows ?></h3>
 
-              <p>User Registrations</p>
+              <p>Personnal</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="?page=teacher" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -566,14 +369,18 @@ include_once('config/connect.php');
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+            <?php 
+            $result = mysqli_query($conn, " SELECT * FROM `class`");
+            $num_rows3 = mysqli_num_rows($result);
+            ?>
+              <h3><?php echo $num_rows3 ?></h3>
 
-              <p>Unique Visitors</p>
+              <p>Class</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="ion ion-home"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="?page=class" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -630,6 +437,10 @@ include_once('config/connect.php');
         $updateStatus = "UPDATE `personnel` SET  `PersonnalStatus`=" . $active . " where `PersonnelAccount` = '" . $_GET['PersonnelAccount'] . "'";
         mysqli_query($conn, $updateStatus);
         echo "<script>window.location.href='?page=teacher'</script>";
+      }
+      if ($page == "UpdateTeacher") {
+        include_once("resurce/Teacher/UpdatePersonnel.php");
+
       }
       //Student
       if ($page == "student") {
@@ -957,3 +768,6 @@ $(document).ready(function() {
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
+<?php
+endif;
+?>
