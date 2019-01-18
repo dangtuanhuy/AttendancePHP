@@ -52,7 +52,6 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 					<th class="text-center"><strong>Reason</strong></th>
 					<th class="text-center"><strong>Personnel</strong></th>
                     <th class="text-center"><strong>Delete</strong></th>
-                    <th class="text-center"><strong>Update</strong></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -75,16 +74,22 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
                         <td><?php echo $row["AttendanceRoom"] ?></td>
                         <td><?php echo $row["AttendanceSession"] ?></td>
                         <td><?php echo $row["AttendanceDate"] ?></td>
-                        <td><?php echo $row["AttendanceCheck"] == 0 ? "A" : "P"?></td>
+						<form method="POST">
+                        <td>
+<?php
+						if ($row["AttendanceCheck"] == 1) {
+						echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Absent</a>';
+					} else {
+						echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Present</a>';
+					}
+					?>
+						</form>
+						</td>
                         <td><?php echo $row["AttendanceReason"] ?></td>
                         <td><?php echo $row["PersonnelName"]?></td>
-						<td align='center'>
-							<a class="btn btn-danger"   href="?page=Attendace&ma=<?php echo $row['AttendanceNum']; ?>" onclick="return deleteConfirm()">
-								Delete</a>
+						<td align='center'><a class="btn btn-danger"   href="?page=Attendace&ma=<?php echo $row['AttendanceNum']; ?>" onclick="return deleteConfirm()">Delete</a>
 						</td>
-						<td>
-						<a class="btn btn-primary" href="?page=Editsubject&ma=<?php echo $row['AttendanceNum']; ?>">Update</a>
-						</td>
+						
 						</tr>
 						<?php
         $num++;

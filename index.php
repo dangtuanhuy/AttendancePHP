@@ -500,6 +500,17 @@ include_once('config/connect.php');
         include_once("resurce/Attendance/EditClassStudent.php");
 
       }
+      //Update
+      if (isset($_GET['page']) && $_GET['page'] == "ActiveAttendace") {
+        if ($_GET['AttendanceCheck'] == 1) {
+          $active = 0;
+        } else {
+          $active = 1;
+        }
+        $updateStatus = "UPDATE `attendance` SET  `AttendanceCheck`=" . $active . " where `AttendanceNum` = '" . $_GET['AttendanceNum'] . "'";
+        mysqli_query($conn, $updateStatus);
+        echo "<script>window.location.href='?page=Attendace'</script>";
+      }
     } else
 
 
