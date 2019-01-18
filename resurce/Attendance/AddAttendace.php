@@ -4,7 +4,7 @@ function blindListTecher($conn)
     $user = $_SESSION['username'];
     $sqlSelect = "SELECT p.`PersonnelName`,p.`PersonnelAccount` FROM `personnel` p WHERE p.PersonnelAccount='" . $user . "' ";
     $result = mysqli_query($conn, $sqlSelect);
-    echo "<select class='form-control' name='slSt'>";
+    echo "<select class='form-control' name='slTe'>";
 
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         echo "
@@ -44,7 +44,7 @@ function blindListStudent($conn)
     JOIN `personnel` p1 ON p1.`PersonnelAccount` = c1.`PersonnelAccount`
     WHERE p1.`PersonnelAccount`='" . $user . "')";
     $result2 = mysqli_query($conn, $sqlInfo);
-    echo "<select class='form-control' name='slSt'>
+    echo "<select class='form-control' name='ClassT'>
 	<option value='0'>Choice Student</option>";
     while ($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
         echo "
@@ -52,6 +52,40 @@ function blindListStudent($conn)
     }
     echo "</select>";
 }
+$Room = "";
+$Seesion = "";
+$Date = date_default_timezone_set('Asia/Ho_Chi_Minh');
+$Gender = "";
+$Reason = "";
+$idTeacher = "";
+$idClass = "";
+if (isset($_POST['btnCheck'])) {
+    $Room = $_POST['txtRoom'];
+
+    $Seesion = $_POST['txtSession'];
+
+    $Date = date('Y-m-d',  strtotime($_POST["txtDate"]));
+
+    if (isset($_POST['grpCheck'])) {
+        $Gender = $_POST['grpCheck'];
+    }
+
+    $Reason = $_POST['txtReason'];
+
+    $idTeacher  = $_POST['slTe'];
+
+    $idClass = $_POST['ClassT'];
+
+    $sqlInsert ="INSERT INTO `attendance`(`ClassStudentNum`, `AttendanceRoom`, `AttendanceSession`, `AttendanceDate`, `AttendanceCheck`, `AttendanceReason`, `PersonnelAccount`) VALUES ($idClass,'$Room','$Seesion','$Date','$Gender','$Reason','$idTeacher')";
+
+    mysqli_query($conn,$sqlInsert);
+    echo '<script> alert("Insert Success!");</script>';
+   
+   echo '<meta http-equiv="refresh" content="0;URL=?page=Attendace"/>';
+   
+
+}
+
 
 ?>
 <div class="container-fluid">
@@ -94,9 +128,8 @@ function blindListStudent($conn)
 					</label>
                     </div>
                     <div class="form-group">
-						<label for="txtReason">Reason:</label>
-						<textarea class="form-control" id="ckeditor"  name="txtReason">
-						</textarea>
+						<label for="txtReason">Reasion:</label>
+						<input type="text" class="form-control" id="txtReason" required name="txtReason" placeholder="Reason">
 					</div>
 					<input type="submit" class="btn btn-primary" name="btnCheck" value="Check"/>
 					<input type="reset" name="btnReset" value="Cancel" class="btn btn-info" />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2019 at 05:09 PM
+-- Generation Time: Jan 18, 2019 at 05:14 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -30,6 +30,7 @@ USE `umbala`;
 -- Table structure for table `attendance`
 --
 
+DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
   `AttendanceNum` bigint(20) NOT NULL,
   `ClassStudentNum` bigint(20) NOT NULL,
@@ -55,6 +56,7 @@ INSERT INTO `attendance` (`AttendanceNum`, `ClassStudentNum`, `AttendanceRoom`, 
 -- Table structure for table `class`
 --
 
+DROP TABLE IF EXISTS `class`;
 CREATE TABLE `class` (
   `ClassId` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `ClassName` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
@@ -79,6 +81,7 @@ INSERT INTO `class` (`ClassId`, `ClassName`, `ClassQty`, `ClassActive`, `Personn
 -- Table structure for table `classstudent`
 --
 
+DROP TABLE IF EXISTS `classstudent`;
 CREATE TABLE `classstudent` (
   `ClassStudentNum` bigint(20) NOT NULL,
   `ClassId` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -100,6 +103,7 @@ INSERT INTO `classstudent` (`ClassStudentNum`, `ClassId`, `StudentId`) VALUES
 -- Table structure for table `education`
 --
 
+DROP TABLE IF EXISTS `education`;
 CREATE TABLE `education` (
   `EducationId` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `EducationName` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -125,6 +129,7 @@ INSERT INTO `education` (`EducationId`, `EducationName`, `EducationDetails`) VAL
 -- Table structure for table `personnel`
 --
 
+DROP TABLE IF EXISTS `personnel`;
 CREATE TABLE `personnel` (
   `PersonnelAccount` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `ParsonnelPassword` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -152,6 +157,7 @@ INSERT INTO `personnel` (`PersonnelAccount`, `ParsonnelPassword`, `PersonnelEmai
 -- Table structure for table `role`
 --
 
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `RoleId` int(11) NOT NULL,
   `RoleName` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
@@ -174,6 +180,7 @@ INSERT INTO `role` (`RoleId`, `RoleName`, `RoleDescription`) VALUES
 -- Table structure for table `student`
 --
 
+DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `StudentCode` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `StudentName` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
@@ -199,6 +206,7 @@ INSERT INTO `student` (`StudentCode`, `StudentName`, `StudentBirth`, `StudentPho
 -- Table structure for table `subject`
 --
 
+DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
   `SubjectId` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `SubjectName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
