@@ -126,7 +126,7 @@ include_once('config/connect.php');
             <i class="fa fa-files-o"></i>
             <span>Management</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">5</span>
+              <span class="label label-primary pull-right">6</span>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -135,6 +135,7 @@ include_once('config/connect.php');
             <li><a href="?page=teacher"><i class="fa fa-circle-o"></i> Teacher</a></li>
             <li><a href="?page=class"><i class="fa fa-circle-o"></i> Class</a></li>
             <li><a href="?page=student"><i class="fa fa-circle-o"></i> Student</a></li>
+            <li><a href="?page=Attendace"><i class="fa fa-circle-o"></i>Attendance</a></li>
           </ul>
         </li>
         <li>
@@ -155,15 +156,15 @@ include_once('config/connect.php');
           </a>
           <ul class="treeview-menu">
           <?php
-                if (isset($_SESSION['username']) && $_SESSION['username'] != "")
-                {
-                ?>
+          if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
+            ?>
           <li><a href="?page=UpdateTeacher"><i class="fa fa-circle-o"></i> Update</a></li>
-          <?php }?>
+          <?php 
+        } ?>
           <li><a href="logout.php"> <i class="fa fa-power-off"></i><?php if (isset($_SESSION["username"])) {
-                                    PersonnelLogin($conn, $_SESSION["username"]);
-                                    echo " ";
-                                  } ?></a></li>
+                                                                    PersonnelLogin($conn, $_SESSION["username"]);
+                                                                    echo " ";
+                                                                  } ?></a></li>
             
           </ul>
         </li>
@@ -299,7 +300,7 @@ include_once('config/connect.php');
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="Index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
       </ol>
     </section>
@@ -484,6 +485,19 @@ include_once('config/connect.php');
       }
       if ($page == "Editclassstudent") {
         include_once("resurce/Classtudent/EditClassStudent.php");
+
+      }
+      //Attendance
+      if ($page == "Attendace") {
+        include_once("resurce/Attendance/Attendace.php");
+
+      }
+      if ($page == "AddAttendace") {
+        include_once("resurce/Attendance/AddAttendace.php");
+
+      }
+      if ($page == "EditAttendace") {
+        include_once("resurce/Attendance/EditClassStudent.php");
 
       }
     } else
