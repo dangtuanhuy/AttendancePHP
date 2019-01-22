@@ -14,6 +14,7 @@
 <?php 
 if (isset($_GET["ma"])) {
 	$AttendanceNum = $_GET["ma"];
+	
 	mysqli_query($conn, "DELETE FROM `attendance` WHERE AttendanceNum= $AttendanceNum");
 }
 ?>
@@ -62,7 +63,8 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
     JOIN classstudent on classstudent.ClassStudentNum = attendance.ClassStudentNum
     JOIN student on student.StudentCode = classstudent.StudentId
     JOIN class on class.ClassId = classstudent.ClassId
-    JOIN subject on subject.SubjectId = class.SubjectId");
+	JOIN subject on subject.SubjectId = class.SubjectId
+	");
 			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 				?>
 					<tr>

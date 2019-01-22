@@ -13,16 +13,43 @@
 
 <?php 
 if (isset($_GET["ma"])) {
-    $SubjectId = $_GET["ma"];
-    mysqli_query($conn, "DELETE FROM `subject` WHERE SubjectId='{$SubjectId}'");
+
+
+	try {
+		$SubjectId = $_GET["ma"];
+		$success = mysqli_query($conn, "DELETE FROM `subject` WHERE SubjectId='{$SubjectId}'");
+		if (!$success) {
+			$error = "You cannot delete this row";
+			throw new Exception($error);
+			echo '<meta http-equiv="refresh" content="0;URL=?page=subject"/>';
+		}
+
+	} catch (Exception $e) {
+
+		echo $e->getMessage();
+	}
 }
 ?>
 <?php
 if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
-    for ($i = 0; $i < count($_POST['checkbox']); $i++) {
-        $SubjectId1 = $_POST['checkbox'][$i];
-        mysqli_query($conn, "DELETE FROM `subject` WHERE SubjectId='{$SubjectId1}'");
-    }
+	try
+	{
+	for ($i = 0; $i < count($_POST['checkbox']); $i++) {
+		$SubjectId1 = $_POST['checkbox'][$i];
+		$success = mysqli_query($conn, "DELETE FROM `subject` WHERE SubjectId='{$SubjectId1}'");
+	}
+		if (!$success) {
+			$error = "You cannot delete this row";
+			throw new Exception($error);
+			echo '<meta http-equiv="refresh" content="0;URL=?page=subject"/>';
+	}
+		
+	}
+	catch (Exception $e) {
+
+		echo $e->getMessage();
+	}
+
 }
 ?>
 <div class="container-fluid">
@@ -55,11 +82,11 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 			</thead>
 			<tbody>
 				<?php 
-    $num = 1;
-    $result = mysqli_query($conn, "SELECT `SubjectId`,`SubjectName`,`SubjectTheory`,`SubjectPractical`,`TheoryPractical`,`SubjectSem`,`EducationName` FROM `subject` 
+			$num = 1;
+			$result = mysqli_query($conn, "SELECT `SubjectId`,`SubjectName`,`SubjectTheory`,`SubjectPractical`,`TheoryPractical`,`SubjectSem`,`EducationName` FROM `subject` 
     JOIN `education` ON subject.EducationId = education.EducationId");
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        ?>
+			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+				?>
 					<tr>
 						<td class="text-center"><input name="checkbox[]" type="checkbox" id="checkbox[]" value="<?php echo $row["SubjectId"] ?>"></td>
 						<td><?php echo $num ?></td>
@@ -79,9 +106,9 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 						</td>
 						</tr>
 						<?php
-        $num++;
-    }
-    ?>
+					$num++;
+				}
+				?>
 				</tbody>
 			</table>
             
