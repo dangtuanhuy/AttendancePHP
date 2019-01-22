@@ -33,8 +33,6 @@ function blindListStudent($conn)
     // $sqlSelect1 ="SELECT c.`ClassId` FROM `class` c
     // JOIN `personnel` p ON p.`PersonnelAccount` = c.`PersonnelAccount`
     // WHERE p.`PersonnelAccount`='" .$user. "'";
-
-    
     // $result1 = mysqli_query($conn,$sqlSelect1 );
 
     $sqlInfo = "SELECT cl.`ClassStudentNum`,s.`StudentName` FROM `classstudent` cl
@@ -42,7 +40,7 @@ function blindListStudent($conn)
     JOIN `student` s ON s.`StudentCode` = cl.`StudentId`
     WHERE cl.ClassId IN ( SELECT c1.`ClassId` FROM `class` c1
     JOIN `personnel` p1 ON p1.`PersonnelAccount` = c1.`PersonnelAccount`
-    WHERE p1.`PersonnelAccount`='" . $user . "')";
+    WHERE  c1.`ClassId`='K02' AND p1.`PersonnelAccount`='" . $user . "')";
     $result2 = mysqli_query($conn, $sqlInfo);
     echo "<select class='form-control' name='ClassT'>
 	<option value='0'>Choice Student</option>";

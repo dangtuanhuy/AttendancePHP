@@ -13,16 +13,16 @@
 
 <?php 
 if (isset($_GET["ma"])) {
-    $AttendanceNum= $_GET["ma"];
-    mysqli_query($conn, "DELETE FROM `attendance` WHERE AttendanceNum= $AttendanceNum");
+	$AttendanceNum = $_GET["ma"];
+	mysqli_query($conn, "DELETE FROM `attendance` WHERE AttendanceNum= $AttendanceNum");
 }
 ?>
 <?php
 if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
-    for ($i = 0; $i < count($_POST['checkbox']); $i++) {
-        $AttendanceNum1 = $_POST['checkbox'][$i];
-        mysqli_query($conn, "DELETE FROM `attendance` WHERE AttendanceNum=$AttendanceNum1");
-    }
+	for ($i = 0; $i < count($_POST['checkbox']); $i++) {
+		$AttendanceNum1 = $_POST['checkbox'][$i];
+		mysqli_query($conn, "DELETE FROM `attendance` WHERE AttendanceNum=$AttendanceNum1");
+	}
 }
 ?>
 <div class="container-fluid">
@@ -56,15 +56,15 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 			</thead>
 			<tbody>
 				<?php 
-    $num = 1;
-    $result = mysqli_query($conn, "SELECT `AttendanceNum`,ClassName,`StudentName`,subject.SubjectName ,`AttendanceRoom`, `AttendanceSession`, `AttendanceDate`, `AttendanceCheck`, `AttendanceReason`, `PersonnelName` FROM `attendance`
+			$num = 1;
+			$result = mysqli_query($conn, "SELECT `AttendanceNum`,ClassName,`StudentName`,subject.SubjectName ,`AttendanceRoom`, `AttendanceSession`, `AttendanceDate`, `AttendanceCheck`, `AttendanceReason`, `PersonnelName` FROM `attendance`
     JOIN personnel on personnel.PersonnelAccount = attendance.PersonnelAccount
     JOIN classstudent on classstudent.ClassStudentNum = attendance.ClassStudentNum
     JOIN student on student.StudentCode = classstudent.StudentId
     JOIN class on class.ClassId = classstudent.ClassId
     JOIN subject on subject.SubjectId = class.SubjectId");
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        ?>
+			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+				?>
 					<tr>
 						<td class="text-center"><input name="checkbox[]" type="checkbox" id="checkbox[]" value="<?php echo $row["AttendanceNum"] ?>"></td>
 						<td><?php echo $num ?></td>
@@ -77,24 +77,24 @@ if (isset($_POST['btnDelete']) && isset($_POST['checkbox'])) {
 						<form method="POST">
                         <td>
 <?php
-						if ($row["AttendanceCheck"] == 1) {
-						echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Absent</a>';
-					} else {
-						echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Present</a>';
-					}
-					?>
+if ($row["AttendanceCheck"] == 1) {
+	echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Absent</a>';
+} else {
+	echo '<a class="btn btn-default" href="?page=ActiveAttendace&AttendanceCheck=' . $row["AttendanceCheck"] . '&AttendanceNum=' . $row["AttendanceNum"] . '">Present</a>';
+}
+?>
 						</form>
 						</td>
                         <td><?php echo $row["AttendanceReason"] ?></td>
-                        <td><?php echo $row["PersonnelName"]?></td>
+                        <td><?php echo $row["PersonnelName"] ?></td>
 						<td align='center'><a class="btn btn-danger"   href="?page=Attendace&ma=<?php echo $row['AttendanceNum']; ?>" onclick="return deleteConfirm()">Delete</a>
 						</td>
 						
 						</tr>
 						<?php
-        $num++;
-    }
-    ?>
+					$num++;
+				}
+				?>
 				</tbody>
 			</table>
             

@@ -6,6 +6,21 @@ $studentphone = "";
 $studentemail = "";
 $studentaddres = "";
 if (isset($_POST['btnAdd'])) {
+	$sql_query_student = "SELECT `StudentCode` FROM `student`";
+	$result_query_student = mysqli_query($conn, $sql_query_student);
+	$listStudentCode = array();
+	while ($row_query_studentCode = mysqli_fetch_array($result_query_student)) {
+		array_push($listStudentCode,$row_query_studentCode [0]);
+	}
+	if(in_array($_POST['txtID'],$listStudentCode))
+	{
+		echo '<script> alert("Available code in the database!");</script>';
+	}
+	else if((date("Y-m-d") - date('Y-m-d',  strtotime($_POST["txtDate"]))) < 18)
+	{
+		echo '<script> alert("Sorry, but you are not yet 18 years old!");</script>';
+	}
+	else{
     $studentcode = $_POST['txtID'];
     $studentname = $_POST['txtName'];
     $studentbirth = $_POST['txtDate'];
@@ -15,7 +30,8 @@ if (isset($_POST['btnAdd'])) {
     $sql = "INSERT INTO `student`(`StudentCode`, `StudentName`, `StudentBirth`, `StudentPhone`, `StudentAddress`, `StudentEmail`) VALUES ('$studentcode','$studentname','$studentbirth ','$studentphone ','$studentaddres',' $studentemail')";
     mysqli_query($conn, $sql);
     echo '<script> alert("Insert Success!");</script>';
-    echo '<meta http-equiv="refresh" content="0;URL=?page=student"/>';
+	echo '<meta http-equiv="refresh" content="0;URL=?page=student"/>';
+	}
 }
 ?>
 

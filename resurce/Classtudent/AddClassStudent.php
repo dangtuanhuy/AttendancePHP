@@ -15,6 +15,7 @@ function bindStudentList($conn)
 <?php 
 function bindClassList($conn)
 {
+	
 	$sqlSelect = "SELECT `ClassId`, `ClassName` FROM `class` ";
 	$result = mysqli_query($conn, $sqlSelect);
 	echo "<select class='form-control' name='slCl'>
